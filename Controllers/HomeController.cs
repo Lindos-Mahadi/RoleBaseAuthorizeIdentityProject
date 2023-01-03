@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RoleBaseIdentiyProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,7 @@ namespace RoleBaseIdentiyProject.Controllers
             return View();
         }
 
+        [Authorize(Roles = RoleName.RoleAdmin)]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -20,6 +22,7 @@ namespace RoleBaseIdentiyProject.Controllers
             return View();
         }
 
+        [Authorize(Roles = RoleName.RoleUser)]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
