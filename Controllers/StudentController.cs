@@ -1,5 +1,5 @@
 ﻿using RoleBaseIdentiyProject.Models;
-using RoleBaseIdentiyProject.Services;
+using RoleBaseIdentiyProject.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +10,25 @@ namespace RoleBaseIdentiyProject.Controllers
 {
     public class StudentController : Controller
     {
-        private IServiceBase<Student> serviceBase;
+        //private IServiceBase<Student> serviceBase;
+        private readonly IStudentRepository studentRepository;
 
-        public StudentController()
+        public StudentController(IStudentRepository studentRepository)
         {
-            this.serviceBase = new ServiceBase<Student>();
+            this.studentRepository = studentRepository;
         }
 
         // GET: Student
         public ActionResult Index()
         {
-            var studentList = serviceBase.GetAll().ToList();
+            var studentList = studentRepository.GetAll().ToList();
             return View(studentList);
         }
 
         // GET: Student/Details/5
         public ActionResult Details(int id)
         {
-            var student = serviceBase.GetById(id);
+            var student = studentRepository.GetById(id);
             return View(student);
         }
 
@@ -44,8 +45,8 @@ namespace RoleBaseIdentiyProject.Controllers
             try
             {
                 // TODO: Add insert logic here
-                serviceBase.Create(studentCollection);
-                serviceBase.Save();
+                studentRepository.Create(studentCollection);
+                studentRepository.Save();
                 return RedirectToAction("Index");
             }
             catch
@@ -57,7 +58,7 @@ namespace RoleBaseIdentiyProject.Controllers
         // GET: Student/Edit/5
         public ActionResult Edit(int id)
         {
-            var student = serviceBase.GetById(id);
+            var student = studentRepository.GetById(id);
             return View(student);
         }
 
@@ -68,8 +69,8 @@ namespace RoleBaseIdentiyProject.Controllers
             try
             {
                 // TODO: Add update logic here
-                serviceBase.Update(studentCollection);
-                serviceBase.Save();
+                studentRepository.Update(studentCollection);
+                studentRepository.Save();
                 return RedirectToAction("Index");
             }
             catch
@@ -81,7 +82,7 @@ namespace RoleBaseIdentiyProject.Controllers
         // GET: Student/Delete/5
         public ActionResult Delete(int id)
         {
-            var student = serviceBase.GetById(id);
+            var student = studentRepository.GetById(id);
             return View(student);
         }
 
@@ -92,8 +93,8 @@ namespace RoleBaseIdentiyProject.Controllers
             try
             {
                 // TODO: Add delete logic here
-                serviceBase.Delete(id);
-                serviceBase.Save();
+                studentRepository.Delete(id);
+                studentRepository.Save();
                 return RedirectToAction("Index");
             }
             catch

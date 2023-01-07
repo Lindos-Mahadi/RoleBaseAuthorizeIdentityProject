@@ -1,3 +1,10 @@
+using Autofac;
+using Autofac.Integration.Mvc;
+using Nest;
+using RoleBaseIdentiyProject.Controllers;
+using RoleBaseIdentiyProject.Repository.Implementation;
+using RoleBaseIdentiyProject.Repository.Interface;
+using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +23,17 @@ namespace RoleBaseIdentiyProject
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+
+            //var builder = new ContainerBuilder();
+            //builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            //builder.RegisterType<HomeController>().InstancePerRequest();
+
+            //builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+
+            //// Set the dependency resolver to be Autofac.
+            //var container = builder.Build();
+            //DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }
